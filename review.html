@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Submit Course Review</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fbfbfb, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      width: 400px;
+      backdrop-filter: blur(10px);
+    }
+    input, textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+    }
+    button {
+      background: linear-gradient(45deg, #ff6a00, #ee0979);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Submit a Course Review</h2>
+    <input type="text" id="course" placeholder="Course Name" />
+    <textarea id="review" placeholder="Write your review..." rows="4"></textarea>
+    <input type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" />
+    <button onclick="submitReview()">Submit</button>
+  </div>
+
+  <script>
+    function submitReview() {
+      const course = document.getElementById('course').value;
+      const review = document.getElementById('review').value;
+      const rating = document.getElementById('rating').value;
+
+      fetch(`http://localhost:3000/submitReview?course=${encodeURIComponent(course)}&review=${encodeURIComponent(review)}&rating=${rating}`)
+        .then(res => res.text())
+        .then(alert)
+        .catch(() => alert("Something went wrong!"));
+    }
+  </script>
+</body>
+</html>

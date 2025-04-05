@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>All Course Reviews</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fbfbfb, #764ba2);
+      color: #000000;
+      padding: 20px;
+    }
+    .review {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>All Course Reviews</h1>
+  <div id="reviews">
+    <!-- 🌟 Default Reviews -->
+    <div class="review">
+      <h3>Python for Everybody - Coursera</h3>
+      <p>This course is perfect for beginners. The professor explains everything so clearly!</p>
+      <strong>Rating: 5</strong>
+    </div>
+    <div class="review">
+        <h3>Java Programming - Great Learning</h3>
+        <p>This course helped me clear my basics in Java. Great examples and assignments!</p>
+        <strong>Rating: 4</strong>
+      </div>
+      
+      <div class="review">
+        <h3>Data Structures & Algorithms - GeeksforGeeks</h3>
+        <p>The best course for mastering DSA. Detailed explanations with coding practice problems.</p>
+        <strong>Rating: 5</strong>
+      </div>
+      
+      <div class="review">
+        <h3>React JS Crash Course - YouTube</h3>
+        <p>Very concise and straight to the point. Great for quick learning!</p>
+        <strong>Rating: 4</strong>
+      </div>
+      
+    <div class="review">
+      <h3>Web Development Bootcamp - Udemy</h3>
+      <p>Helped me build my own website from scratch. Very hands-on and detailed.</p>
+      <strong>Rating: 4</strong>
+    </div>
+    <div class="review">
+      <h3>Introduction to Machine Learning - edX</h3>
+      <p>Good for understanding basics but could use more real-world examples.</p>
+      <strong>Rating: 3</strong>
+    </div>
+  </div>
+
+  <script>
+    // 🎯 Fetch dynamic reviews from server and add them below default ones
+    fetch("http://localhost:3000/getReviews")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("reviews");
+
+        data.forEach(r => {
+          const div = document.createElement("div");
+          div.className = "review";
+          div.innerHTML = `
+            <h3>${r.course}</h3>
+            <p>${r.review}</p>
+            <strong>Rating: ${r.rating}</strong>
+          `;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
+
